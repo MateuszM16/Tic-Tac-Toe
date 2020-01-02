@@ -15,7 +15,7 @@ _login_animation.addEventListener('blur', function(){ _stop1=1;});
 _login_animation.addEventListener('blur', login_animation_back);
 
 _login_animation.addEventListener('focus', function(){ _login_animation.style.borderBottomColor = "#ff7c00";});
-_login_animation.addEventListener('blur', function(){ _login_animation.style.borderBottomColor = "black"; check1();  });
+_login_animation.addEventListener('blur', function(){ _login_animation.style.borderBottomColor = "black"; _error_login.style.display="none"; check1();  });
 
 
 function login_animation_start()
@@ -49,7 +49,7 @@ _password_animation.addEventListener('blur', function(){ _stop2=1;});
 _password_animation.addEventListener('blur', password_animation_back);
 
 _password_animation.addEventListener('focus', function(){ _password_animation.style.borderBottomColor = "#ff7c00";});
-_password_animation.addEventListener('blur', function(){ _password_animation.style.borderBottomColor = "black"; check2();});
+_password_animation.addEventListener('blur', function(){ _password_animation.style.borderBottomColor = "black"; _error_password.style.display="none"; check2();});
 
 
 function password_animation_start()
@@ -85,7 +85,7 @@ _login2_animation.addEventListener('blur', function(){ _stop3=1;});
 _login2_animation.addEventListener('blur', login2_animation_back);
 
 _login2_animation.addEventListener('focus', function(){ _login2_animation.style.borderBottomColor = "#ff7c00";});
-_login2_animation.addEventListener('blur', function(){ _login2_animation.style.borderBottomColor = "black"; check1_up();  });
+_login2_animation.addEventListener('blur', function(){ _login2_animation.style.borderBottomColor = "black"; _error_login2.style.display="none"; check1_up();  });
 
 
 function login2_animation_start()
@@ -120,7 +120,7 @@ _password2_animation.addEventListener('blur', function(){ _stop4=1;});
 _password2_animation.addEventListener('blur', password2_animation_back);
 
 _password2_animation.addEventListener('focus', function(){ _password2_animation.style.borderBottomColor = "#ff7c00";});
-_password2_animation.addEventListener('blur', function(){ _password2_animation.style.borderBottomColor = "black"; check2_up();  });
+_password2_animation.addEventListener('blur', function(){ _password2_animation.style.borderBottomColor = "black"; _error_password2.style.display="none"; check2_up();  });
 
 function password2_animation_start()
 {
@@ -153,7 +153,7 @@ _repassword_animation.addEventListener('blur', function(){ _stop5=1;});
 _repassword_animation.addEventListener('blur', repassword_animation_back);
 
 _repassword_animation.addEventListener('focus', function(){ _repassword_animation.style.borderBottomColor = "#ff7c00";});
-_repassword_animation.addEventListener('blur', function(){ _repassword_animation.style.borderBottomColor = "black"; check3_up();  });
+_repassword_animation.addEventListener('blur', function(){ _repassword_animation.style.borderBottomColor = "black"; _error_repassword.style.display="none"; check3_up();});
 
 function repassword_animation_start()
 {
@@ -188,7 +188,7 @@ _email_animation.addEventListener('blur', email_animation_back);
 
 
 _email_animation.addEventListener('focus', function(){ _email_animation.style.borderBottomColor = "#ff7c00";});
-_email_animation.addEventListener('blur', function(){ _email_animation.style.borderBottomColor = "black"; check4_up();  });
+_email_animation.addEventListener('blur', function(){ _email_animation.style.borderBottomColor = "black";_error_email.style.display="none"; check4_up();  });
 
 function email_animation_start()
 {

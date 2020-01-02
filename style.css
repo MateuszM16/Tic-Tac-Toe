@@ -26,6 +26,8 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-family: 'Fredericka the Great', cursive;
+
 }
 
 
@@ -44,10 +46,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: center;
-
-
-  
+	align-items: center; 
 }
 
 .log-in
@@ -152,12 +151,15 @@ body {
 	position: absolute;
   width: 15vw;
   height: 2.5vw;
+  line-height: 2.2;
   border: none;
   border-bottom: solid 0.2vw black;
   background: none;
-  font-size: 2vw;
+  font-size: 1.6vw;
   text-align:center;
   cursor: pointer;
+  font-family: 'Indie Flower', cursive;
+
 }
 
 .input:focus
@@ -199,7 +201,9 @@ body {
 	width:14vw;
 	border-radius: 25px;
 	border:solid 0.1vw #ff7c00;
-	
+  font-family: 'Fredericka the Great', cursive;
+  font-size: 2vw;
+  line-height: 3vw;
 }
 
 #bottom:hover
@@ -221,7 +225,10 @@ body {
 	border: none;
 	width:14vw;
 	border-radius: 25px;
-  	border:solid 0.1vw #ff7c00;
+  border:solid 0.1vw #ff7c00;
+  font-family: 'Fredericka the Great', cursive;
+  font-size: 2vw;
+  line-height: 3vw;
 }
 
 #bottom2:hover
@@ -247,8 +254,59 @@ body {
   font-size: 2vw;
   text-align:center;
   color: black;
-
 }
+
+.error_login
+{
+  color:red;
+  font-size: 4vw;
+  position: absolute;
+  top:7vw;
+  left: 23vw;
+  display: none;
+  cursor: pointer;
+}
+
+.error_login_text
+{
+  color:black;
+  font-size: 4vw;
+  position: absolute;
+  left: 1vw;
+  top:-2vw;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.705);
+  min-width: 12vw ;
+  padding-top: 1vw;
+  padding: 1vw;
+  font-size: 1vw;
+  border-radius: 10px;
+  font-family: 'Indie Flower', cursive;
+}
+
+.triangle {
+	width: 0;
+  height: 0;
+  position: absolute;
+  display: none;
+	border-top: 1vw solid transparent;
+	border-bottom: 1vw solid transparent;
+	border-right: 1vw solid rgba(255, 255, 255, 0.705);
+  margin: 0.5vw auto 0;
+}
+
+.t1
+{
+  top:7.8vw;
+  left: 24vw;
+}
+
+
+.error_login:hover +.t1
+{
+  display: block;
+}
+
 
 .input:focus + .login 
 {
@@ -271,12 +329,12 @@ body {
 }
 
 @keyframes elogin {
-  0% {left:7vw; }
+  0% {left:7.5vw;}
   20% {left:8vw;}
   40% {left:6vw;}
   60% {left:7.4vw;}
   80% {left:6.6vw;}
-  100% {left:7vw;}
+  100% {left:7.5vw;}
 }
 
 .password
@@ -292,6 +350,48 @@ body {
   text-align:center;
   color: black;
 
+}
+
+.error_password
+{
+  color:red;
+  font-size: 4vw;
+  position: absolute;
+
+  top:12vw;
+  left: 23vw;
+  display: none;
+  cursor: pointer;
+
+}
+
+.t2
+{
+  top:12.8vw;
+  left: 24vw;
+}
+
+.error_password:hover +.t2
+{
+  display: block;
+}
+
+
+.error_password_text
+{
+  color:black;
+  font-size: 4vw;
+  position: absolute;
+  top:-2vw;
+  left: 1vw;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.705);
+  min-width: 12vw ;
+  padding-top: 1vw;
+  padding: 1vw;
+  font-size: 1vw;
+  border-radius: 10px;
+  font-family: 'Indie Flower', cursive;
 }
 
 .input:focus + .password
@@ -310,17 +410,98 @@ body {
 }
 
 @keyframes epassword {
-    0% {left:7vw; }
-    20% {left:8vw;}
-    40% {left:6vw;}
-    60% {left:7.4vw;}
-    80% {left:6.6vw;}
-    100% {left:7vw;}
+  0% {left:7.5vw;}
+  20% {left:8vw;}
+  40% {left:6vw;}
+  60% {left:7.4vw;}
+  80% {left:6.6vw;}
+  100% {left:7.5vw;}
   }
 
 @keyframes x {
-  0% {;}
-  100% {;}
+  0% {}
+  100% {}
+}
+
+.error_login2
+{
+  color:red;
+  font-size: 4vw;
+  position: absolute;
+  top:7vw;
+  left: 23vw;
+  display: none;
+  cursor: pointer;
+}
+
+.error_login2_text
+{
+  color:black;
+  font-size: 4vw;
+  position: absolute;
+  left: 1vw;
+  top:-2vw;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.705);
+  min-width: 12vw ;
+  padding-top: 1vw;
+  padding: 1vw;
+  font-size: 1vw;
+  border-radius: 10px;
+  font-family: 'Indie Flower', cursive;
+}
+
+.t3
+{
+  top:7.8vw;
+  left: 24vw;
+}
+
+.error_login2:hover +.t3
+{
+  display: block;
+}
+
+.error_password2
+{
+  color:red;
+  font-size: 4vw;
+  position: absolute;
+
+  top:12vw;
+  left: 23vw;
+  display: none;
+  cursor: pointer;
+
+}
+
+.error_password2:hover +.t4
+{
+  display: block;
+}
+
+
+.error_password2_text
+{
+  color:black;
+  font-size: 4vw;
+  position: absolute;
+  top:-2vw;
+  left: 1vw;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.705);
+  min-width: 12vw ;
+  padding-top: 1vw;
+  padding: 1vw;
+  font-size: 1vw;
+  border-radius: 10px;
+  font-family: 'Indie Flower', cursive;
+}
+
+.t4
+{
+  top:12.8vw;
+  left: 24vw;
 }
 
 
@@ -342,6 +523,48 @@ body {
 .input:focus + .re_password
 {
   color:#ff7c00;
+}
+
+.error_repassword
+{
+  color:red;
+  font-size: 4vw;
+  position: absolute;
+
+  top:17vw;
+  left: 23vw;
+  display: none;
+  cursor: pointer;
+
+}
+
+.error_repassword:hover +.t5
+{
+  display: block;
+}
+
+
+.error_repassword_text
+{
+  color:black;
+  font-size: 4vw;
+  position: absolute;
+  top:-2vw;
+  left: 1vw;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.705);
+  min-width: 12vw ;
+  padding-top: 1vw;
+  padding: 1vw;
+  font-size: 1vw;
+  border-radius: 10px;
+  font-family: 'Indie Flower', cursive;
+}
+
+.t5
+{
+  top:17.8vw;
+  left: 24vw;
 }
 
 @keyframes re_password {
@@ -369,9 +592,53 @@ body {
 
 }
 
+
 .input:focus + .e-mail
 {
   color:#ff7c00;
+}
+
+
+.error_email
+{
+  color:red;
+  font-size: 4vw;
+  position: absolute;
+
+  top:22vw;
+  left: 23vw;
+  display: none;
+  cursor: pointer;
+
+}
+
+.error_email:hover +.t6
+{
+  display: block;
+}
+
+
+.error_email_text
+{
+  color:black;
+  font-size: 4vw;
+  position: absolute;
+  top:-2vw;
+  left: 1vw;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.705);
+  min-width: 12vw ;
+  padding-top: 1vw;
+  padding: 1vw;
+  font-size: 1vw;
+  border-radius: 10px;
+  font-family: 'Indie Flower', cursive;
+}
+
+.t6
+{
+  top:22.8vw;
+  left: 24vw;
 }
 
 @keyframes e-mail {
