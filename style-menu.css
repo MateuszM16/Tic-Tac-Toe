@@ -1,0 +1,59 @@
+.menu-game
+{
+	top:-100vw;
+	position: fixed;
+	width: 32vw;
+	height: 32vw;
+	background-image: radial-gradient(ellipse at center, rgba(52, 134, 211, 0.6), rgba(52, 134, 235, 0.9));
+	box-shadow: 0 0 1vw #3486eb;
+	color:white;
+	
+	border-radius: 15px;
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center; 
+}
+
+.TTT
+{
+  position: absolute;
+  top:1.5vw;
+  font-size: 4vw;
+}
+
+.menu_button
+{
+  width: 16vw !important;
+  height: 4vw !important;
+}
+
+.start_bottom
+{
+  position: absolute;
+  top:10vw !important;
+}
+
+.rank_bottom
+{
+  position: absolute;
+  top:15vw !important;
+}
+
+.info_bottom
+{
+  position: absolute;
+  top:20vw !important;
+}
+
+.exit_bottom
+{
+  position: absolute;
+  top:25vw !important;
+}
+
+@keyframes menu-game-animation-start {
+  0% {top:5vw;}
+  100% {top:-100vw;}
+}

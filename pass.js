@@ -13,8 +13,6 @@ const _error_repassword = document.querySelector(".error_repassword");
 const _error_email = document.querySelector(".error_email");
 
 _button_in.addEventListener('click', check);
-_login1.addEventListener('change', check1);
-_password1.addEventListener('change', check2);
 
 var _error_list_login = [];
 var _error_list_password = [];
@@ -32,8 +30,10 @@ const _error_password2_text = document.querySelector(".error_password2_text");
 const _error_repassword_text = document.querySelector(".error_repassword_text");
 const _error_email_text = document.querySelector(".error_email_text");
 
-const inputvalue = /\s/;
+const inputvalue = /\W/;
+const inputvaluepassword = /\s/;
 
+var error_ajax = 0;
 
 function error_text()
 {
@@ -103,6 +103,10 @@ function error_text2()
 
 }
 
+
+
+error_ajax = 0;
+
 function check()
 {
 	var _login_value = document.querySelector("#login").value;
@@ -122,12 +126,6 @@ function check()
 		_error_list_login.push("Nie dozwolone znaki");
 		elogin2();
 	}
-
-	if(_error_list_login.length==0)
-	{
-		_login1.style.borderBottomColor = "rgb(69, 255, 32)" ;
-		_error_login.style.display="none";
-	}
 	
 	if(_password_value=="")
 	{
@@ -135,16 +133,75 @@ function check()
 		epassword1();
 	}
 
-	if(_password_value.match(inputvalue))
+	if(_password_value.match(inputvaluepassword))
 	{
 		_error_list_password.push("Nie dozwolone znaki");
 		epassword2();
 	}
+
+
+	if((_error_list_login.length==0)&&(_error_list_password.length==0))
+	{
+
+		error_ajax=1;
+
+//---------AJAX-START-------------------------------------------------------
+
+		var xmlhttp = new XMLHttpRequest();
+    	xmlhttp.onreadystatechange = function() 
+    	{
+        	if ((this.readyState == 4) && (this.status == 200))
+        	{
+				var responseJSON = JSON.parse(this.responseText);
+
+				if(responseJSON.answer=="error")
+				{
+					for(var i=0; responseJSON._error_list_login.length>i;i++)
+					{
+						_error_list_login.push(responseJSON._error_list_login[i]);
+						elogin2();
+					}
+	
+					for(var i=0; responseJSON._error_list_password.length>i;i++)
+					{
+						_error_list_password.push(responseJSON._error_list_password[i]);
+						epassword2();
+					}
+					
+					error_text();
+				}
+
+				else if(responseJSON.answer=="success")
+				{
+					success1();
+				}
+
+				else
+				{
+					alert("Błąd serwera, proszę spróbować pózniej!");
+				}
+			
+			}
+			
+    	};
+
+    	xmlhttp.open("POST", "ajax-login.php");
+		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xmlhttp.send("LOGIN="+ _login_value+"&PASSWORD="+_password_value);
+
+//---------AJAX-END-------------------------------------------------------
+		
+	}
+
+	if(_error_list_login.length==0)
+	{
+		_login1.style.borderBottomColor = "rgb(69, 255, 32)" ;
+		_error_login.style.display="none";
+	}
 	
 	if(_error_list_password.length==0)
 	{
-
-		_password1.style.borderBottomColor = "rgb(69, 255, 32)" ;
+		_password1.style.borderBottomColor = "black" ;
 		_error_password.style.display="none";
 	}
 
@@ -171,15 +228,45 @@ function check1()
 		elogin2();
 	}
 
+
+	error_ajax=0;
+
 	if(_error_list_login.length==0)
 	{
-		_login1.style.borderBottomColor = "rgb(69, 255, 32)" ;
-		_error_login.style.display="none";
+
+		error_ajax=1;
+
+//---------AJAX-START-------------------------------------------------------
+
+		var xmlhttp = new XMLHttpRequest();
+    	xmlhttp.onreadystatechange = function() 
+    	{
+        	if ((this.readyState == 4) && (this.status == 200) && (this.responseText !="")) 
+        	{
+				var responseJSON = JSON.parse(this.responseText);
+        	    _error_list_login.push(responseJSON);
+				elogin2();
+				error_text();
+			}
+
+        	else
+        	{
+				_login1.style.borderBottomColor = "rgb(69, 255, 32)" ;
+				_error_login.style.display="none";
+        	}
+    	};
+
+    	xmlhttp.open("POST", "ajax-login-test_in.php");
+		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xmlhttp.send("LOGIN="+ _login_value);
+
+//---------AJAX-END-------------------------------------------------------
+		
 	}
 
-	error_text();
-	
+	if(error_ajax==0) error_text();
 }
+
 
 function check2()
 {
@@ -192,7 +279,7 @@ function check2()
 		epassword1();
 	}
 
-	if(_password_value.match(inputvalue))
+	if(_password_value.match(inputvaluepassword))
 	{
 		_error_list_password.push("Nie dozwolone znaki");
 		epassword2();
@@ -201,14 +288,13 @@ function check2()
 	if(_error_list_password.length==0)
 	{
 
-		_password1.style.borderBottomColor = "rgb(69, 255, 32)" ;
+		_password1.style.borderBottomColor = "black" ;
 		_error_password.style.display="none";
 	}
 
 	error_text();
 
 }
-
 
 
 function end()
@@ -276,11 +362,8 @@ const _email1 = document.querySelector("#e-mail");
 const _email2 = document.querySelector(".e-mail");
 
 _button_up.addEventListener('click', check_up);
-_login1_up.addEventListener('change', check1_up);
-_password1_up.addEventListener('change', check2_up);
-_repassword1.addEventListener('change', check3_up);
-_email1.addEventListener('change', check4_up);
 
+error_ajax = 0;
 
 function check_up()
 {
@@ -313,10 +396,10 @@ function check_up()
 		elogin2_up();
 	}
 
-	if(_error_list_login2.length==0)
+	if(_login_value_up.length>20)
 	{
-		_login1_up.style.borderBottomColor = "rgb(69, 255, 32)" ;
-		_error_login2.style.display="none";
+		_error_list_login2.push("Login musi się składać z maximum 20 znaków");
+		elogin2_up();
 	}
 	
 	if(_password_value_up=="")
@@ -325,7 +408,7 @@ function check_up()
 		epassword1_up();
 	}
 
-	if(_password_value_up.match(inputvalue))
+	if(_password_value_up.match(inputvaluepassword))
 	{
 		_error_list_password2.push("Nie dozwolone znaki");
 		epassword2_up();
@@ -337,10 +420,10 @@ function check_up()
 		epassword2_up();
 	}
 
-	if(_error_list_password2.length==0)
+	if(_password_value_up.length>30)
 	{
-		_password1_up.style.borderBottomColor = "rgb(69, 255, 32)" ;
-		_error_password2.style.display="none";
+		_error_list_password2.push("Hasło musi się składać z maximum 30 znaków");
+		epassword2_up();
 	}
 
 	if(_repassword_value_up=="")
@@ -349,7 +432,7 @@ function check_up()
 		erepassword();
 	}
 
-	if(_repassword_value_up.match(inputvalue))
+	if(_repassword_value_up.match(inputvaluepassword))
 	{
 		_error_list_repassword.push("Nie dozwolone znaki");
 		erepassword2();
@@ -360,13 +443,6 @@ function check_up()
 		_error_list_repassword.push("Hasła muszą być identyczne");
 		erepassword2();
 	}
-
-	if(_error_list_repassword.length==0)
-	{
-		_repassword1.style.borderBottomColor = "rgb(69, 255, 32)" ;
-		_error_repassword.style.display="none";
-	}
-
 
 	const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
@@ -380,6 +456,88 @@ function check_up()
 	{
 		_error_list_email.push("Podaj poprawny adres e-mail");
 		eemail2();
+	}
+
+	if((_error_list_login2.length==0)&&(_error_list_password2.length==0)&&(_error_list_repassword.length==0)&&(_error_list_email.length==0))
+	{
+
+		error_ajax=1;
+
+//---------AJAX-START-------------------------------------------------------
+
+		var xmlhttp = new XMLHttpRequest();
+    	xmlhttp.onreadystatechange = function() 
+    	{
+        	if ((this.readyState == 4) && (this.status == 200))
+        	{
+				var responseJSON = JSON.parse(this.responseText);
+
+				if(responseJSON.answer=="error")
+				{
+					for(var i=0; responseJSON._error_list_login2.length>i;i++)
+					{
+						_error_list_login2.push(responseJSON._error_list_login2[i]);
+						elogin2_up();
+					}
+
+					for(var i=0; responseJSON._error_list_password2.length>i;i++)
+					{
+						_error_list_password2.push(responseJSON._error_list_password2[i]);
+						epassword2_up();
+					}
+
+					for(var i=0; responseJSON._error_list_repassword.length>i;i++)
+					{
+						_error_list_repassword.push(responseJSON._error_list_repassword[i]);
+						erepassword2();
+					}
+
+					for(var i=0; responseJSON._error_list_email.length>i;i++)
+					{
+						_error_list_email.push(responseJSON._error_list_email[i]);
+						eemail2();
+					}
+					
+					error_text2();
+				}
+
+				else if(responseJSON.answer=="success")
+				{
+					success2();
+				}
+
+				else
+				{
+					alert("Błąd serwera, proszę spróbować pózniej!");
+				}			
+			}
+			
+    	};
+
+    	xmlhttp.open("POST", "ajax-add-user.php");
+		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xmlhttp.send("LOGIN="+ _login_value_up+"&PASSWORD="+_password_value_up+"&REPASSWORD="+_repassword_value_up+"&EMAIL="+_email_value_up);
+
+//---------AJAX-END-------------------------------------------------------
+		
+	}
+
+	if(_error_list_login2.length==0)
+	{
+		_login1_up.style.borderBottomColor = "rgb(69, 255, 32)" ;
+		_error_login2.style.display="none";
+	}
+
+	if(_error_list_password2.length==0)
+	{
+		_password1_up.style.borderBottomColor = "rgb(69, 255, 32)" ;
+		_error_password2.style.display="none";
+	}
+	
+	if(_error_list_repassword.length==0)
+	{
+		_repassword1.style.borderBottomColor = "rgb(69, 255, 32)" ;
+		_error_repassword.style.display="none";
 	}
 
 	if(_error_list_email.length==0)
@@ -417,13 +575,48 @@ function check1_up()
 		elogin2_up();
 	}
 
-	if(_error_list_login2.length==0)
+	if(_login_value_up.length>20)
 	{
-		_login1_up.style.borderBottomColor = "rgb(69, 255, 32)" ;
-		_error_login2.style.display="none";
+		_error_list_login2.push("Login musi się składać z maximum 20 znaków");
+		elogin2_up();
 	}
 
-	error_text2();
+	error_ajax=0;
+
+	if(_error_list_login2.length==0)
+	{
+
+		error_ajax=1;
+
+//---------AJAX-START-------------------------------------------------------
+
+		var xmlhttp = new XMLHttpRequest();
+    	xmlhttp.onreadystatechange = function() 
+    	{
+        	if ((this.readyState == 4) && (this.status == 200) && (this.responseText !="")) 
+        	{
+				var responseJSON = JSON.parse(this.responseText);
+        	    _error_list_login2.push(responseJSON);
+				elogin2_up();
+				error_text2();
+			}
+
+        	else
+        	{
+				_login1_up.style.borderBottomColor = "rgb(69, 255, 32)" ;
+				_error_login2.style.display="none";
+        	}
+    	};
+
+    	xmlhttp.open("POST", "ajax-login-test_up.php");
+		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xmlhttp.send("LOGIN="+ _login_value_up);
+
+//---------AJAX-END-------------------------------------------------------
+		
+	}
+
+	if(error_ajax==0) error_text2();
 	
 }
 
@@ -440,7 +633,7 @@ function check2_up()
 		epassword1_up();
 	}
 
-	if(_password_value_up.match(inputvalue))
+	if(_password_value_up.match(inputvaluepassword))
 	{
 		_error_list_password2.push("Nie dozwolone znaki");
 		epassword2_up();
@@ -449,6 +642,12 @@ function check2_up()
 	if(_password_value_up.length<4)
 	{
 		_error_list_password2.push("Hasło musi się składać z minimum 4 znaków");
+		epassword2_up();
+	}
+
+	if(_password_value_up.length>30)
+	{
+		_error_list_password2.push("Hasło musi się składać z maximum 30 znaków");
 		epassword2_up();
 	}
 
@@ -477,7 +676,7 @@ function check3_up()
 		erepassword();
 	}
 
-	if(_repassword_value_up.match(inputvalue))
+	if(_repassword_value_up.match(inputvaluepassword))
 	{
 		_error_list_repassword.push("Nie dozwolone znaki");
 		erepassword2();
@@ -519,13 +718,42 @@ function check4_up()
 		eemail2();
 	}
 
+	error_ajax = 0;
+
 	if(_error_list_email.length==0)
 	{
-		_email1.style.borderBottomColor = "rgb(69, 255, 32)" ;
-		_error_email.style.display="none";
+
+		error_ajax=1;
+
+//---------AJAX-START-------------------------------------------------------
+
+		var xmlhttp = new XMLHttpRequest();
+    	xmlhttp.onreadystatechange = function() 
+    	{
+        	if ((this.readyState == 4) && (this.status == 200) && (this.responseText !="")) 
+        	{
+				var responseJSON = JSON.parse(this.responseText);
+        	    _error_list_email.push(responseJSON);
+				eemail2();
+				error_text2();
+			}
+
+        	else
+        	{
+				_email1.style.borderBottomColor = "rgb(69, 255, 32)" ;
+				_error_email.style.display="none";
+        	}
+    	};
+
+    	xmlhttp.open("POST", "ajax-email-test.php");
+		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xmlhttp.send("EMAIL="+ _email_value_up);
+
+//---------AJAX-END-------------------------------------------------------
+
 	}
 
-	error_text2();
+	if(error_ajax==0) error_text2();
 
 }
 

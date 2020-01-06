@@ -9,6 +9,7 @@ var _stop5 = 1;
 var _stop6 = 1;
 
 _login_animation.addEventListener('mouseover', login_animation_start);
+_login_animation.addEventListener('focus', login_animation_start);
 _login_animation.addEventListener('mouseout', login_animation_back);
 _login_animation.addEventListener('focus', function(){ _stop1=0;});
 _login_animation.addEventListener('blur', function(){ _stop1=1;});
@@ -43,6 +44,7 @@ const _password_animation = document.querySelector("#password");
 const _password_animation2 = document.querySelector(".password");
 
 _password_animation.addEventListener('mouseover', password_animation_start);
+_password_animation.addEventListener('focus', password_animation_start);
 _password_animation.addEventListener('mouseout', password_animation_back);
 _password_animation.addEventListener('focus', function(){ _stop2=0;});
 _password_animation.addEventListener('blur', function(){ _stop2=1;});
@@ -79,6 +81,7 @@ const _login2_animation2 = document.querySelector(".login2");
 
 
 _login2_animation.addEventListener('mouseover', login2_animation_start);
+_login2_animation.addEventListener('focus', login2_animation_start);
 _login2_animation.addEventListener('mouseout', login2_animation_back);
 _login2_animation.addEventListener('focus', function(){ _stop3=0;});
 _login2_animation.addEventListener('blur', function(){ _stop3=1;});
@@ -114,6 +117,7 @@ const _password2_animation = document.querySelector("#password2");
 const _password2_animation2 = document.querySelector(".password2");
 
 _password2_animation.addEventListener('mouseover', password2_animation_start);
+_password2_animation.addEventListener('focus', password2_animation_start);
 _password2_animation.addEventListener('mouseout', password2_animation_back);
 _password2_animation.addEventListener('focus', function(){ _stop4=0;});
 _password2_animation.addEventListener('blur', function(){ _stop4=1;});
@@ -147,6 +151,7 @@ const _repassword_animation = document.querySelector("#re_password");
 const _repassword_animation2 = document.querySelector(".re_password");
 
 _repassword_animation.addEventListener('mouseover', repassword_animation_start);
+_repassword_animation.addEventListener('focus', repassword_animation_start);
 _repassword_animation.addEventListener('mouseout', repassword_animation_back);
 _repassword_animation.addEventListener('focus', function(){ _stop5=0;});
 _repassword_animation.addEventListener('blur', function(){ _stop5=1;});
@@ -181,6 +186,7 @@ const _email_animation = document.querySelector("#e-mail");
 const _email_animation2 = document.querySelector(".e-mail");
 
 _email_animation.addEventListener('mouseover', email_animation_start);
+_email_animation.addEventListener('focus', email_animation_start);
 _email_animation.addEventListener('mouseout', email_animation_back);
 _email_animation.addEventListener('focus', function(){ _stop6=0;});
 _email_animation.addEventListener('blur', function(){ _stop6=1;});
@@ -262,4 +268,53 @@ function menu_animation_back()
 	_log_up.style.animation = "log2 1s 0.5s 1 forwards";
 	_log_in.style.animation = "log1 1s 1s 1 forwards ";
 	
+}
+
+
+const _menu = document.querySelector(".menu-game");
+const _perspective = document.querySelector(".perspective");
+const _button_range = document.querySelector(".button_range");
+
+_menu.addEventListener('click', menu_game_animation_start);
+
+function menu_game_animation_start()
+{
+	_menu.style.top = "5vw";
+	_menu.style.animation = "menu-game-animation-start 1s 0.5s 1 forwards";
+
+	_perspective.style.display="block";
+	_button_range.style.display="block";
+	_button_range.style.right="-100vw";
+	_button_range.style.animation = "button_range_animation 1s 0.5s 1 forwards";
+}
+
+function success1()
+{
+	_log_in.style.top = "5vw";
+	_log_up.style.top = "-100vw";
+	
+	_log1[0].style.cursor="default";
+	_log2[0].style.cursor="pointer";
+
+	_log1[1].style.cursor="default";
+	_log2[1].style.cursor="pointer";
+
+	_log_in.style.animation = "log2	1s 0.5s 1 forwards";
+	_menu.style.animation = "log1 1s 1s 1 forwards";
+
+}
+
+function success2()
+{
+	_log_in.style.top = "-100vw";
+	_log_up.style.top = "5vw";
+	
+	_log1[0].style.cursor="pointer";
+	_log2[0].style.cursor="default";
+
+	_log1[1].style.cursor="pointer";
+	_log2[1].style.cursor="default";
+
+	_log_up.style.animation = "log2 1s 0.5s 1 forwards";
+	_menu.style.animation = "log1 1s 1s 1 forwards";
 }

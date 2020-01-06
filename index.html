@@ -8,12 +8,12 @@
     
     <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great|Indie+Flower&display=swap&subset=latin-ext" rel="stylesheet">
 
-		<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-menu.css">
 		<link rel="stylesheet" href="style-input-range.css">
 		<script src="skrypt.js" defer></script>
 		<script src="login-move.js" defer></script>
-		<script src="pass.js" defer></script>
-	
+    <script src="pass.js" defer></script>
 		
 	</head>
 
@@ -65,12 +65,18 @@
         <input type='submit' value='Sign up' id='bottom2' class='input'>
         
       </div>
-    
-	
+
+      <div class="menu-game">
+        <div class="TTT menu-button">Tic-Tac-Toe</div>
+        <input type="submit" value="Start" id="bottom" class="input start_bottom menu_button">
+        <input type="submit" value="Rank" id="bottom" class="input rank_bottom menu_button">
+        <input type="submit" value="Info" id="bottom" class="input info_bottom menu_button">
+        <input type="submit" value="Exit" id="bottom" class="input exit_bottom menu_button">
+      </div>
+
         <input type="range" class="button_range" value="10" min="10" max="60" step="0.1">
         <div class="perspective">
         <div class="main-cube">
-          
                <div class="cube_front cube_y"></div>
                <div class="cube_back cube_y"></div>
                <div class="cube_righ cube_y"></div>

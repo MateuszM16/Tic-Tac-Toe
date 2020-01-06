@@ -30,7 +30,6 @@ body {
 
 }
 
-
 .log
 {
 	top:5vw;
@@ -670,6 +669,11 @@ body {
   
   display:none;
   
+}
+
+@keyframes button_range_animation {
+  from {right: -100vw;}
+  to {right: 35vw;}
 }
 
 .main-cube {
